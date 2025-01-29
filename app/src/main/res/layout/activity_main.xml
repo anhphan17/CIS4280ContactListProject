@@ -116,15 +116,16 @@
                 android:id="@+id/editName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                    android:ems="14"
-                    android:inputType="textPersonName"
-                    android:hint="Name"
+                android:ems="14"
+                android:hint="Name"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textContact"
-                android:imeOptions="actionNext">
+                app:layout_constraintTop_toBottomOf="@+id/textContact">
+
                 <requestFocus />
             </EditText>
 
@@ -143,66 +144,63 @@
                 android:id="@+id/editAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="16"
-                android:inputType="textPersonName"
                 android:hint="Enter Street Address"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textAddress"
-                android:imeOptions="actionNext">
-            </EditText>
+                app:layout_constraintTop_toBottomOf="@id/textAddress"></EditText>
 
             <EditText
                 android:id="@+id/editCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="9"
-                android:inputType="textCapWords"
                 android:hint="City"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"
                 android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/editState">
-            </EditText>
+                android:inputType="textCapWords"
+                android:minHeight="48dp"
+                android:nextFocusDown="@+id/editState"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
 
             <EditText
                 android:id="@+id/editState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
                 android:ems="2"
-                android:inputType="textCapCharacters"
                 android:hint="State"
-                android:maxLength="2"
-                app:layout_constraintStart_toEndOf="@+id/editCity"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"
                 android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/editZipcode">
-            </EditText>
+                android:inputType="textCapCharacters"
+                android:maxLength="2"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusDown="@+id/editZipcode"
+                app:layout_constraintStart_toEndOf="@+id/editCity"
+                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
 
             <EditText
                 android:id="@+id/editZipcode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
                 android:ems="5"
-                android:inputType="number"
                 android:hint="Zipcode"
-                android:maxLength="5"
-                app:layout_constraintStart_toEndOf="@+id/editState"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"
                 android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/editHome">
-            </EditText>
+                android:inputType="number"
+                android:maxLength="5"
+                android:minHeight="48dp"
+                android:nextFocusDown="@+id/editHome"
+                app:layout_constraintStart_toEndOf="@+id/editState"
+                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
 
             <TextView
                 android:id="@+id/textHome"
@@ -219,16 +217,15 @@
                 android:id="@+id/editHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:ems="8"
+                android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:maxLength="14"
+                android:minHeight="48dp"
+                android:nextFocusDown="@+id/editCell"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textHome"
-                android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/editCell">
-            </EditText>
+                app:layout_constraintTop_toBottomOf="@+id/textHome"></EditText>
 
             <TextView
                 android:id="@+id/textCell"
@@ -245,16 +242,15 @@
                 android:id="@+id/editCell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
                 android:layout_marginStart="2dp"
                 android:ems="8"
+                android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:maxLength="14"
+                android:minHeight="48dp"
+                android:nextFocusDown="@+id/editEmail"
                 app:layout_constraintStart_toStartOf="@+id/textCell"
-                app:layout_constraintTop_toBottomOf="@+id/textCell"
-                android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/editEmail">
-            </EditText>
+                app:layout_constraintTop_toBottomOf="@+id/textCell"></EditText>
 
             <TextView
                 android:id="@+id/textEmail"
@@ -271,15 +267,14 @@
                 android:id="@+id/editEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="16"
+                android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textEmail"
-                android:imeOptions="actionNext">
-            </EditText>
+                app:layout_constraintTop_toBottomOf="@+id/textEmail"></EditText>
 
             <TextView
                 android:id="@+id/textBday"
@@ -311,6 +306,7 @@
                 android:layout_marginRight="60dp"
                 android:layout_marginEnd="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textBirthday"
                 tools:layout_editor_absoluteX="252dp"
                 tools:layout_editor_absoluteY="398dp" />
 
