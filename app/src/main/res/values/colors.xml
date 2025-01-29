@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="navbar_background">#1a1a48</color>
     <color name="toolbar_background">#bebebe</color>
+    <color name="dialog_button_color">#26C6DA</color>
 </resources>
