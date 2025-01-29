@@ -3,10 +3,12 @@ package com.example.cis4280mycontactlistproject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
@@ -14,8 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 
-public class MainActivity extends AppCompatActivity {
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.SaveDateListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         initSettingsButton();
         initToggleButton();
         setForEditing(false);
+        initChangeDateButton();
 
     }
 
@@ -107,4 +114,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void didFinishDatePickerDialog(Calendar selectedTime) {
+        TextView birthday = findViewById(R.id.textBirthday);
+        birthday.setText(DateFormat.format("MM/dd/yyyy", selectedTime));
+    }
+    
+    private void initChangeDateButton() {
+        Button changeDate = findViewById(R.id.btnBirthday);
+        changeDate.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               FragmentManager fm = getSupportFragmentManager();
+               DatePickerDialog datePickerDialog = new DatePickerDialog();
+               datePickerDialog.show(fm, "DatePick");
+           } 
+        }); 
+    }
 }
