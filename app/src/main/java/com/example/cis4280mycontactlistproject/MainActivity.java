@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         initToggleButton();
         setForEditing(false);
         initChangeDateButton();
+        initSaveButton();
 
     }
 
@@ -130,5 +131,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                datePickerDialog.show(fm, "DatePick");
            } 
         }); 
+    }
+
+    private void initSaveButton() {
+        Button saveButton = findViewById(R.id.buttonSave);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ContactSettingsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 }
