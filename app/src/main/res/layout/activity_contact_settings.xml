@@ -8,51 +8,44 @@
     tools:context=".ContactSettingsActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/navbar_background"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/imageButtonList"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
-            android:maxHeight="100dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/button_to_display_a_list_of_contacts"
-            android:maxWidth="100dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/contactlisticon" />
 
         <ImageButton
             android:id="@+id/imageButtonMap"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:maxHeight="100dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/button_to_display_map"
-            android:maxWidth="100dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/mapicon" />
 
         <ImageButton
             android:id="@+id/imageButtonSettings"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="30dp"
-            android:maxHeight="100dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/button_to_display_settings"
-            android:maxWidth="100dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/settingsicon" />
     </LinearLayout>
 
