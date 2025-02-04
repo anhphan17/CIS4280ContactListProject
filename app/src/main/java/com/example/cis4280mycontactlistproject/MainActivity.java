@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void initMapButton() {
-        ImageButton ibList = findViewById(R.id.imageButtonMap);
-        ibList.setOnClickListener(new View.OnClickListener() {
+        ImageButton ibMap = findViewById(R.id.imageButtonMap);
+        ibMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ContactMapActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void initSettingsButton() {
-        ImageButton ibList = findViewById(R.id.imageButtonSettings);
-        ibList.setOnClickListener(new View.OnClickListener() {
+        ImageButton ibSettings = findViewById(R.id.imageButtonSettings);
+        ibSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ContactSettingsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
