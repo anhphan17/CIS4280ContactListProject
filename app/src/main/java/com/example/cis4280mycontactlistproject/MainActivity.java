@@ -141,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
                     if (currentContact.getContactID() == -1) {
                         wasSuccessful = ds.insertContact(currentContact);
+                        if (wasSuccessful) {
+                            int newId = ds.getLastContactID();
+                            currentContact.setContactID(newId);
+                        }
                     }
                     else {
                         wasSuccessful = ds.updateContact(currentContact);
