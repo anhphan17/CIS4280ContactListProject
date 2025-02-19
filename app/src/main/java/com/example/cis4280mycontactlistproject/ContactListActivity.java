@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +25,7 @@ import kotlin.OverloadResolutionByLambdaReturnType;
 public class ContactListActivity extends AppCompatActivity {
 
     private ArrayList<Contact> contacts;
+    private ContactAdapter contactAdapter;
 
     private View.OnClickListener onItemClickListener = new View.OnClickListener() {
         @Override
@@ -51,6 +54,7 @@ public class ContactListActivity extends AppCompatActivity {
         initMapButton();
         initSettingsButton();
         initAddContactButton();
+        initDeleteSwitch();
 
         ContactDataSource ds = new ContactDataSource(this);
 
@@ -62,7 +66,7 @@ public class ContactListActivity extends AppCompatActivity {
             RecyclerView contactList = findViewById(R.id.rvContacts);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             contactList.setLayoutManager(layoutManager);
-            ContactAdapter contactAdapter = new ContactAdapter(contacts);
+            contactAdapter = new ContactAdapter(contacts, this);
             contactList.setAdapter(contactAdapter);
 
             contactAdapter.setOnItemClickListener(onItemClickListener);
@@ -82,7 +86,8 @@ public class ContactListActivity extends AppCompatActivity {
         ImageButton ibMap = findViewById(R.id.imageButtonMap);
         ibMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(ContactListActivity.this, ContactMapActivity.class);
+                Intent intent = new Intent(ContactListActivity.this,
+                        ContactMapActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -106,6 +111,17 @@ public class ContactListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void initDeleteSwitch() {
+        Switch s = findViewById(R.id.switchDelete);
+        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Boolean status = compoundButton.isChecked();
+                contactAdapter.setDelete(status);
+                contactAdapter.notifyDataSetChanged();
             }
         });
     }
