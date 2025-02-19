@@ -100,6 +100,8 @@ public class ContactListActivity extends AppCompatActivity {
                 contactList.setLayoutManager(layoutManager);
                 contactAdapter = new ContactAdapter(contacts, this);
                 contactList.setAdapter(contactAdapter);
+
+                contactAdapter.setOnItemClickListener(onItemClickListener);
             }
             else {
                 Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
