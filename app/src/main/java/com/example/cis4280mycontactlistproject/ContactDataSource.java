@@ -141,4 +141,29 @@ public class ContactDataSource {
         }
         return contacts;
     }
+
+    public Contact getSpecificContact(int contactId) {
+        Contact contact = new Contact();
+        String query = "SELECT * FROM contact WHERE _id =" + contactId;
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            contact.setContactID(cursor.getInt(0));
+            contact.setContactName(cursor.getString(1));
+            contact.setStreetAddress(cursor.getString(2));
+            contact.setCity(cursor.getString(3));
+            contact.setState(cursor.getString(4));
+            contact.setZipCode(cursor.getString(5));
+
+            contact.setPhoneNumber(cursor.getString(6));
+            contact.setCellNumber(cursor.getString(7));
+            contact.seteMail(cursor.getString(8));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.valueOf(cursor.getString(9)));
+            contact.setBirthday(calendar);
+
+            cursor.close();
+        }
+        return contact;
+    }
 }
