@@ -3,6 +3,7 @@ package com.example.cis4280mycontactlistproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class ContactListActivity extends AppCompatActivity {
         initListButton();
         initMapButton();
         initSettingsButton();
+        initAddContactButton();
 
         ContactDataSource ds = new ContactDataSource(this);
 
@@ -93,6 +95,16 @@ public class ContactListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ContactListActivity.this, ContactSettingsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initAddContactButton() {
+        Button newContact = findViewById(R.id.buttonAddContact);
+        newContact.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
