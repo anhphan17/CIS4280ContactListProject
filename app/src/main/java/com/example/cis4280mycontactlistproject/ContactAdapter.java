@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ContactAdapter extends RecyclerView.Adapter {
@@ -24,11 +26,14 @@ public class ContactAdapter extends RecyclerView.Adapter {
     public class ContactViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewContact;
         public TextView textPhone;
+
+        public TextView textEmailListItem;
         public Button deleteButton;
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewContact = itemView.findViewById(R.id.textContactName);
             textPhone = itemView.findViewById(R.id.textPhoneNumber);
+            textEmailListItem = itemView.findViewById(R.id.textEmailListItem);
             deleteButton = itemView.findViewById(R.id.buttonDeleteContact);
             itemView.setTag(this);
             itemView.setOnClickListener(mOnItemClickListener);
@@ -40,6 +45,10 @@ public class ContactAdapter extends RecyclerView.Adapter {
 
         public TextView getPhoneTextView() {
             return textPhone;
+        }
+
+        public TextView getTextEmailListItem() {
+            return textEmailListItem;
         }
 
         public Button getDeleteButton() {
@@ -69,6 +78,18 @@ public class ContactAdapter extends RecyclerView.Adapter {
         ContactViewHolder cvh = (ContactViewHolder) holder;
         cvh.getContactTextView().setText(contactData.get(position).getContactName());
         cvh.getPhoneTextView().setText(contactData.get(position).getPhoneNumber());
+        cvh.getTextEmailListItem().setText(contactData.get(position).geteMail());
+
+        int colorRed = parentContext.getResources().getColor(R.color.system_red);
+        int colorBlue = parentContext.getResources().getColor(R.color.system_blue);
+
+        if (position % 2 == 0) {
+            cvh.getContactTextView().setTextColor(colorRed);
+        }
+        else {
+            cvh.getContactTextView().setTextColor(colorBlue);
+        }
+
         if (isDeleting) {
             cvh.getDeleteButton().setVisibility(View.VISIBLE);
             cvh.getDeleteButton().setOnClickListener(new View.OnClickListener() {
