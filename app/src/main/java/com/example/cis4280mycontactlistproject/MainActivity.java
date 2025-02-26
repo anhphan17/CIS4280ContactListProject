@@ -1,6 +1,5 @@
 package com.example.cis4280mycontactlistproject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -95,10 +94,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private void setForEditing(boolean enabled) {
         EditText editName = findViewById(R.id.editName);
-        EditText editAddress = findViewById(R.id.editAddress);
-        EditText editCity = findViewById(R.id.editCity);
-        EditText editState = findViewById(R.id.editState);
-        EditText editZipcode = findViewById(R.id.editZipcode);
+        EditText editAddress = findViewById(R.id.addressMapET);
+        EditText editCity = findViewById(R.id.cityMapET);
+        EditText editState = findViewById(R.id.stateMapET);
+        EditText editZipcode = findViewById(R.id.zipcodeMapET);
         EditText editPhone = findViewById(R.id.editHome);
         EditText editCell = findViewById(R.id.editCell);
         EditText editEmail = findViewById(R.id.editEmail);
@@ -192,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        final EditText etStreetAddress = findViewById(R.id.editAddress);
+        final EditText etStreetAddress = findViewById(R.id.addressMapET);
         etStreetAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        final EditText etCity = findViewById(R.id.editCity);
+        final EditText etCity = findViewById(R.id.cityMapET);
         etCity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
@@ -230,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        final EditText etState = findViewById(R.id.editState);
+        final EditText etState = findViewById(R.id.stateMapET);
         etState.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
@@ -249,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        final EditText etZipcode = findViewById(R.id.editZipcode);
+        final EditText etZipcode = findViewById(R.id.zipcodeMapET);
         etZipcode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
@@ -342,10 +341,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
         EditText editName = findViewById(R.id.editName);
-        EditText editAddress = findViewById(R.id.editAddress);
-        EditText editCity = findViewById(R.id.editCity);
-        EditText editState = findViewById(R.id.editState);
-        EditText editZipcode = findViewById(R.id.editZipcode);
+        EditText editAddress = findViewById(R.id.addressMapET);
+        EditText editCity = findViewById(R.id.cityMapET);
+        EditText editState = findViewById(R.id.stateMapET);
+        EditText editZipcode = findViewById(R.id.zipcodeMapET);
         EditText editPhone = findViewById(R.id.editHome);
         EditText editCell = findViewById(R.id.editCell);
         EditText editEmail = findViewById(R.id.editEmail);

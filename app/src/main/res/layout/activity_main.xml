@@ -123,7 +123,7 @@
             </EditText>
 
             <TextView
-                android:id="@+id/textAddress"
+                android:id="@+id/addressMapTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -134,7 +134,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editName" />
 
             <EditText
-                android:id="@+id/editAddress"
+                android:id="@+id/addressMapET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -145,10 +145,10 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textAddress"></EditText>
+                app:layout_constraintTop_toBottomOf="@id/addressMapTV"></EditText>
 
             <EditText
-                android:id="@+id/editCity"
+                android:id="@+id/cityMapET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -158,12 +158,12 @@
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords"
                 android:minHeight="48dp"
-                android:nextFocusDown="@+id/editState"
+                android:nextFocusDown="@+id/stateMapET"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
+                app:layout_constraintTop_toBottomOf="@id/addressMapET"></EditText>
 
             <EditText
-                android:id="@+id/editState"
+                android:id="@+id/stateMapET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -175,12 +175,12 @@
                 android:maxLength="2"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
-                android:nextFocusDown="@+id/editZipcode"
-                app:layout_constraintStart_toEndOf="@+id/editCity"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
+                android:nextFocusDown="@+id/zipcodeMapET"
+                app:layout_constraintStart_toEndOf="@+id/cityMapET"
+                app:layout_constraintTop_toBottomOf="@id/addressMapET"></EditText>
 
             <EditText
-                android:id="@+id/editZipcode"
+                android:id="@+id/zipcodeMapET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -192,8 +192,8 @@
                 android:maxLength="5"
                 android:minHeight="48dp"
                 android:nextFocusDown="@+id/editHome"
-                app:layout_constraintStart_toEndOf="@+id/editState"
-                app:layout_constraintTop_toBottomOf="@id/editAddress"></EditText>
+                app:layout_constraintStart_toEndOf="@+id/stateMapET"
+                app:layout_constraintTop_toBottomOf="@id/addressMapET"></EditText>
 
             <TextView
                 android:id="@+id/textHome"
@@ -204,7 +204,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Home Phone:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editCity" />
+                app:layout_constraintTop_toBottomOf="@+id/cityMapET" />
 
             <EditText
                 android:id="@+id/editHome"
@@ -229,7 +229,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Cell Phone:"
                 app:layout_constraintStart_toEndOf="@+id/editHome"
-                app:layout_constraintTop_toBottomOf="@+id/editCity" />
+                app:layout_constraintTop_toBottomOf="@+id/cityMapET" />
 
             <EditText
                 android:id="@+id/editCell"
