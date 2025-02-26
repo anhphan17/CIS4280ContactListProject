@@ -114,4 +114,15 @@ public class ContactMapActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            locationManager.removeUpdates(gpsListener);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
