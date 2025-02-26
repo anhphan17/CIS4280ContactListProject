@@ -38,6 +38,8 @@ public class ContactMapActivity extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener gpsListener;
+    LocationListener networkListener;
+    Location currentBestLocation;
     final int PERMISSION_REQUEST_LOCATION = 101;
 
     @Override
@@ -50,24 +52,6 @@ public class ContactMapActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        locationManager = (LocationManager)
-                getBaseContext().getSystemService(Context.LOCATION_SERVICE);
-        gpsListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                TextView txtLatitude = findViewById(R.id.textLatitude);
-                TextView txtLongitude = findViewById(R.id.textLongitude);
-                TextView txtAccuracy = findViewById(R.id.textAccuracy);
-                txtLatitude.setText(String.valueOf(location.getLatitude()));
-                txtLongitude.setText(String.valueOf(location.getLongitude()));
-                txtAccuracy.setText(String.valueOf(location.getAccuracy()));
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
-        };
 
         initListButton();
         initMapButton();
@@ -171,6 +155,7 @@ public class ContactMapActivity extends AppCompatActivity {
         }
         try {
             locationManager.removeUpdates(gpsListener);
+            locationManager.removeUpdates(networkListener);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -191,12 +176,36 @@ public class ContactMapActivity extends AppCompatActivity {
             gpsListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(@NonNull Location location) {
-                    TextView txtLatitude = findViewById(R.id.textLatitude);
-                    TextView txtLongitude = findViewById(R.id.textLongitude);
-                    TextView txtAccuracy = findViewById(R.id.textAccuracy);
-                    txtLatitude.setText(String.valueOf(location.getLatitude()));
-                    txtLongitude.setText(String.valueOf(location.getLongitude()));
-                    txtAccuracy.setText(String.valueOf(location.getAccuracy()));
+                    if (isBetterLocation(location)) {
+                        currentBestLocation = location;
+
+                        TextView txtLatitude = findViewById(R.id.textLatitude);
+                        TextView txtLongitude = findViewById(R.id.textLongitude);
+                        TextView txtAccuracy = findViewById(R.id.textAccuracy);
+                        txtLatitude.setText(String.valueOf(location.getLatitude()));
+                        txtLongitude.setText(String.valueOf(location.getLongitude()));
+                        txtAccuracy.setText(String.valueOf(location.getAccuracy()));
+                    }
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {}
+                public void onProviderEnabled(String provider) {}
+                public void onProviderDisabled(String provider) {}
+            };
+
+            networkListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(@NonNull Location location) {
+                    if (isBetterLocation(location)) {
+                        currentBestLocation = location;
+
+                        TextView txtLatitude = findViewById(R.id.textLatitude);
+                        TextView txtLongitude = findViewById(R.id.textLongitude);
+                        TextView txtAccuracy = findViewById(R.id.textAccuracy);
+                        txtLatitude.setText(String.valueOf(location.getLatitude()));
+                        txtLongitude.setText(String.valueOf(location.getLongitude()));
+                        txtAccuracy.setText(String.valueOf(location.getAccuracy()));
+                    }
                 }
 
                 public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -206,6 +215,9 @@ public class ContactMapActivity extends AppCompatActivity {
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     0, 0, gpsListener);
+
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    0, 0, networkListener);
         }
         catch (Exception e) {
             Toast.makeText(getBaseContext(), "Error, Location not available",
@@ -231,5 +243,19 @@ public class ContactMapActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private boolean isBetterLocation(Location location) {
+        boolean isBetter = false;
+        if (currentBestLocation == null) {
+            isBetter = true;
+        }
+        else if (location.getAccuracy() <= currentBestLocation.getAccuracy()) {
+            isBetter = true;
+        }
+        else if (location.getTime() - currentBestLocation.getTime() > 5*60*1000) {
+            isBetter = true;
+        }
+        return isBetter;
     }
 }
