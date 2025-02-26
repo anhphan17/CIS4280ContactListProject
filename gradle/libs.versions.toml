@@ -8,6 +8,8 @@ material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
 design = "28.0.0"
+playServicesMaps = "19.1.0"
+playServicesMapsLicense = "12.0.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -18,6 +20,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 design = { group = "com.android.support", name = "design", version.ref = "design" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+play-services-maps-license = { group = "com.google.android.gms", name = "play-services-maps-license", version.ref = "playServicesMapsLicense" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
