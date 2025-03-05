@@ -3,9 +3,12 @@ package com.example.cis4280mycontactlistproject;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.text.InputType;
@@ -36,8 +39,10 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.SaveDateListener {
 
+    final int CAMERA_REQUEST = 1888;
     private Contact currentContact;
     final int PERMISSION_REQUEST_PHONE = 102;
+    final int PERMISSION_REQUEST_CAMERA = 103;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,64 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         initSaveButton();
         initTextChangedEvents();
         initCallFunction();
+        initImageButton();
 
+    }
+
+    private void initImageButton() {
+        ImageButton ib = findViewById(R.id.imageContact);
+        ib.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (ContextCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(
+                                MainActivity.this, Manifest.permission.CAMERA)) {
+                            Snackbar.make(findViewById(R.id.main),
+                                    "The app needs permission to take pictures.",
+                                    Snackbar.LENGTH_INDEFINITE)
+                                    .setAction("Ok", new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+                                    ActivityCompat.requestPermissions(MainActivity.this,
+                                            new String[] {Manifest.permission.CAMERA},
+                                            PERMISSION_REQUEST_CAMERA);
+                                }
+                            }).show();
+                        }
+                        else {
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[] {Manifest.permission.CAMERA},
+                                    PERMISSION_REQUEST_CAMERA);
+                        }
+                    }
+                    else {
+                        takePhoto();
+                    }
+                }
+                else {
+                    takePhoto();
+                }
+            }
+        });
+    }
+
+    public void takePhoto() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                Bitmap scaledPhoto = Bitmap.createScaledBitmap(photo, 144,144,true);
+                ImageButton imageContact = (ImageButton) findViewById(R.id.imageContact);
+                imageContact.setImageBitmap(scaledPhoto);
+                currentContact.setPicture(scaledPhoto);
+            }
+        }
     }
 
     private void initCallFunction() {
@@ -137,6 +199,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             + "from this app", Toast.LENGTH_LONG).show();
                 }
             }
+            case PERMISSION_REQUEST_CAMERA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    takePhoto();
+                }
+                else {
+                    Toast.makeText(MainActivity.this,
+                            "You will not be able to save contact pictures from this app",
+                            Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
         }
     }
 
@@ -204,6 +277,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         EditText editEmail = findViewById(R.id.editEmail);
         Button buttonChange = findViewById(R.id.btnBirthday);
         Button buttonSave = findViewById(R.id.buttonSave);
+        ImageButton picture = findViewById(R.id.imageContact);
+
 
         editName.setEnabled(enabled);
         editAddress.setEnabled(enabled);
@@ -213,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         editEmail.setEnabled(enabled);
         buttonChange.setEnabled(enabled);
         buttonSave.setEnabled(enabled);
+        picture.setEnabled(enabled);
 
         if (enabled) {
             editName.requestFocus();
@@ -454,6 +530,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         EditText editCell = findViewById(R.id.editCell);
         EditText editEmail = findViewById(R.id.editEmail);
         TextView birthDay = findViewById(R.id.textBirthday);
+        ImageButton picture = (ImageButton) findViewById(R.id.imageContact);
+        if (currentContact.getPicture() != null) {
+            picture.setImageBitmap(currentContact.getPicture());
+        }
+        else {
+            picture.setImageResource(R.drawable.profilephotoicon);
+        }
 
         editName.setText(currentContact.getContactName());
         editAddress.setText(currentContact.getStreetAddress());
