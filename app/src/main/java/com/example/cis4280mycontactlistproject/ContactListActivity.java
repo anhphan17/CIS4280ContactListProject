@@ -39,7 +39,7 @@ public class ContactListActivity extends AppCompatActivity {
             int position = viewHolder.getAdapterPosition();
             int contactID = contacts.get(position).getContactID();
             Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
-            intent.putExtra("contactID", contactID);
+            intent.putExtra("contactid", contactID);
             startActivity(intent);
         }
     };
@@ -99,6 +99,8 @@ public class ContactListActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     @Override
     public void onResume() {
