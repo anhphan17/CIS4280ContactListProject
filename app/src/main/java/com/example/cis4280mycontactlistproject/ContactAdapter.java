@@ -82,12 +82,16 @@ public class ContactAdapter extends RecyclerView.Adapter {
 
         int colorRed = parentContext.getResources().getColor(R.color.system_red);
         int colorBlue = parentContext.getResources().getColor(R.color.system_blue);
+        int colorNavy = parentContext.getResources().getColor(R.color.navbar_background);
 
-        if (position % 2 == 0) {
+        if (position % 3 == 0) {
             cvh.getContactTextView().setTextColor(colorRed);
         }
-        else {
+        else if (position % 3 == 1){
             cvh.getContactTextView().setTextColor(colorBlue);
+        }
+        else if (position % 3 == 2) {
+            cvh.getContactTextView().setTextColor(colorNavy);
         }
 
         if (isDeleting) {
